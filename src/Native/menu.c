@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include <caml/mlvalues.h>
+#include <caml/memory.h>
 
 #ifdef WIN32
 #include "ReveryWin32.h"
@@ -18,4 +20,21 @@ CAMLprim value revery_menuSupported() {
 #else
     return Val_false;
 #endif
+}
+
+value revery_create_menu() {
+    CAMLparam0();
+    value ret = 0;
+
+#ifdef WIN32
+    ret = revery_create_menu_win32();
+#elif __APPLE__
+    fprintf(stderr, "WARNING - Not implemented: %s_cocoa", __func__);
+#elif __linux__
+    fprintf(stderr, "WARNING - Not implemented: %s_gtk", __func__);
+#else
+    fprintf(stderr, "WARNING - Not implemented: %s", __func__);
+#endif
+
+    CAMLreturn(Bool_val(ret));
 }
