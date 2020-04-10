@@ -95,7 +95,7 @@ jobs:
         id: print_docs_path
         run: node .github/workflows/print_docs_path.js
       - name: Generate docs
-        run: esy @doc build --display verbose -j 1 --release
+        run: esy @doc build --release
       - run: ls ./_esy
       - run: ls ./_esy/doc
       - run: ls ./_esy/doc/store
