@@ -44,6 +44,7 @@ jobs:
         run: esy build-dependencies --release
       - name: Generate opam files
         run: |
+          exit 0
           esy build dune build @check
           git diff --exit-code || ([[ "$(git log -1 --pretty=format:'%an')" != "Github Runner" ]] && git commit -am "opam, " || git commit --amend -am "$(git log -1 --pretty=format:'%s')opam, ")
       - name: format sources files
